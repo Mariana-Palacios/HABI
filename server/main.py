@@ -36,12 +36,41 @@ def get_db():
 def agregar_tienda_data(tienda: schemas.Tienda, db: Session = Depends(get_db)):
     return crud.agregar_tienda(db=db, tienda=tienda)
 
+
+@app.get("/tienda/")
+def obtener_tiendas(db: Session = Depends(get_db)):
+    return crud.obtener_valores_tienda(db=db)
+
+#bedida
+
+@app.post("/bebida/")
+def agregar_bebida_data(bebida: schemas.Bebida, db: Session = Depends(get_db)):
+    return crud.agregar_bebida(db=db, bebida=bebida)
+
+
+@app.get("/bebida/")
+def obtener_valores_bebida_todo(db: Session = Depends(get_db)):
+    return crud.obtener_valores_bebida(db=db)
+
+
+@app.post("/bebedor/")
+def agregar_bebedor_data(bebedor: schemas.Bebedor, db: Session = Depends(get_db)):
+    return crud.agregar_bebedor(db=db, bebedor=bebedor)
+
+@app.get("/bebedor/")
+def obtener_valores_bebedor_todo(db: Session = Depends(get_db)):
+    return crud.obtener_valores_bebedor(db=db)
+
+@app.get("/frecuenta/")
+def obtener_valores_frecuenta_todo(db: Session = Depends(get_db)):
+    return crud.obtener_valores_frecuenta(db=db)
+
 '''
 @app.put("/aquarium_data/")
 def append_data_aquarium(aquarium: schemas.AquariumParametersIn, db: Session = Depends(get_db)):
     return crud.append_aquarium_data(db=db, aquarium=aquarium)
 
-@app.get("/aquarium_data/")
+@app.get("/tienda/")
 def get_last_id_aquarium(db: Session = Depends(get_db)):
-    return crud.get_aquarium_data(db=db)
+    return crud.obtener_valores_tienda(db=db)
 '''

@@ -1,0 +1,35 @@
+.NuevoOrdenMundial {
+  height: 100vh;
+  width: 100vw;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+}
+.flex-j-c {
+  justify-content: center;
+}
+.flex-j-s-b {
+  justify-content: space-between;
+}
+.flex-j-f-s {
+  justify-content: flex-start;
+}
+.flex-a-i {
+  align-items: center;
+}
+.flex-a-i-s-b {
+  align-items: space-between;
+}
+.flex-f-d-c {
+  flex-direction: column;
+}
+.flex-f-w {
+  flex-wrap: wrap;
+}/*# sourceMappingURL=styles.css.map */
