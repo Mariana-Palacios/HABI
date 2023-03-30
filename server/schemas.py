@@ -62,7 +62,7 @@ class Bebedor(BebedorBase):
 # Definir modelo base para la Gusta
 class GustaBase(BaseModel):
     cedula: int
-    nombre_bebida:Union[str, Bebida]
+    codigo_bebida:Union[str, Bebida]
 
 # Definir modelo para crear nuevas Gustas
 class GustaCreate(GustaBase):

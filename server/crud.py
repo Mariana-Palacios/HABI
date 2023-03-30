@@ -30,7 +30,7 @@ Bebida
 
 
 #POST valor BEBIDA
-def agregar_bebida(db: Session, bebida: schemas.Bebida):
+def agregar_bebida(db: Session, bebida: schemas.BebidaCreate):
     db_bebida = models.Bebida(
         codigo_bebida = bebida.codigo_bebida,
         nombre_bebida = bebida.nombre_bebida
@@ -50,7 +50,7 @@ Bebedor
 '''
 
 #POST valor BEBEDOR
-def agregar_bebedor(db: Session, bebedor: schemas.Bebedor):
+def agregar_bebedor(db: Session, bebedor: schemas.BebedorCreate):
     db_bebedor = models.Bebedor(
         cedula = bebedor.cedula,
         nombre = bebedor.nombre
@@ -70,7 +70,7 @@ Frecuenta
 '''
 
 #POST al FRECUENTA
-def agregar_frecuenta(db: Session, frecuenta: schemas.Frecuenta):
+def agregar_frecuenta(db: Session, frecuenta: schemas.FrecuentaCreate):
     db_frecuenta = models.Frecuenta(
         cedula = frecuenta.cedula,
         codigo_tienda = frecuenta.codigo_tienda
@@ -83,7 +83,7 @@ def agregar_frecuenta(db: Session, frecuenta: schemas.Frecuenta):
 
 #GET al FRECUENTA
 def obtener_valores_frecuenta(db: Session = Depends(SessionLocal)):
-    frecuenta = db.query(models.frecuenta).all()
+    frecuenta = db.query(models.Frecuenta).all()
     return frecuenta
 
 
@@ -92,7 +92,7 @@ Vende
 '''
 
 #POST al vende
-def agregar_vende(db: Session, vende: schemas.Vende):
+def agregar_vende(db: Session, vende: schemas.VendeCreate):
     db_vende = models.Vende(
         codigo_tienda = vende.codigo_tienda,
         codigo_bebida = vende.codigo_bebida,
@@ -114,10 +114,10 @@ Gusta
 '''
 
 #POST al GUSTA
-def agregar_gusta(db: Session, gusta: schemas.Gusta):
+def agregar_gusta(db: Session, gusta: schemas.GustaCreate):
     db_gusta = models.Gusta(
         cedula = gusta.cedula,
-        codigo_bebida = gusta.codigo_bebida,
+        codigo_bebida = gusta.codigo_bebida
     )
     db.add(db_gusta)
     db.commit()

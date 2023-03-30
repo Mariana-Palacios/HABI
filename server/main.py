@@ -44,15 +44,9 @@ def obtener_tiendas(db: Session = Depends(get_db)):
     return crud.obtener_valores_tienda(db=db)
 
 
-@app.get("/testing_def/")
-def testing_def(db: Session = Depends(get_db)):
-    crud.gusta_colombiana(db=db)
-    return {"nombre": "momda"}
-
-
 #bedida
 
-@app.post("/bebida/")
+@app.post("/bebida/", response_model=schemas.Bebida)
 def agregar_bebida_data(bebida: schemas.Bebida, db: Session = Depends(get_db)):
     return crud.agregar_bebida(db=db, bebida=bebida)
 
@@ -63,7 +57,7 @@ def obtener_valores_bebida_todo(db: Session = Depends(get_db)):
 
 #bebedor
 
-@app.post("/bebedor/")
+@app.post("/bebedor/", response_model=schemas.Bebedor)
 def agregar_bebedor_data(bebedor: schemas.Bebedor, db: Session = Depends(get_db)):
     return crud.agregar_bebedor(db=db, bebedor=bebedor)
 
@@ -73,7 +67,7 @@ def obtener_valores_bebedor_todo(db: Session = Depends(get_db)):
 
 #gusta
 
-@app.post("/gusta/")
+@app.post("/gusta/", response_model=schemas.Gusta)
 def agregar_gusta_data(gusta: schemas.Gusta, db: Session = Depends(get_db)):
     return crud.agregar_gusta(db=db, gusta = gusta)
 
@@ -83,9 +77,9 @@ def obtener_valores_gusta_todo(db: Session = Depends(get_db)):
 
 #frecuenta
 
-@app.post("/frecuenta/")
-def obtener_valores_frecuenta_todo(frecuenta: schemas.Frecuenta, db: Session = Depends(get_db)):
-    return crud.obtener_valores_frecuenta(db=db, frecuenta = frecuenta)
+@app.post("/frecuenta/", response_model=schemas.Frecuenta)
+def agregar_frecuenta_data(frecuenta: schemas.Frecuenta, db: Session = Depends(get_db)):
+    return crud.agregar_frecuenta(db=db, frecuenta = frecuenta)
 
 @app.get("/frecuenta/")
 def obtener_valores_frecuenta_todo(db: Session = Depends(get_db)):
@@ -93,7 +87,7 @@ def obtener_valores_frecuenta_todo(db: Session = Depends(get_db)):
 
 #vende
 
-@app.post("/vende/")
+@app.post("/vende/", response_model=schemas.Vende)
 def agregar_vende_data(vende: schemas.Vende, db: Session = Depends(get_db)):
     return crud.agregar_vende(db=db, vende=vende)
 
