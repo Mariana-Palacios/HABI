@@ -2,9 +2,14 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 from database import SessionLocal
 import models, schemas
+from sqlalchemy.orm import joinedload
 
-#POST valor tienda
-def agregar_tienda(db: Session, tienda: schemas.Tienda):
+'''
+Tienda
+'''
+
+#POST valor TIENDA
+def agregar_tienda(db: Session, tienda: schemas.TiendaCreate):
     db_tienda = models.Tienda(
         codigo_tienda = tienda.codigo_tienda,
         nombre_tienda = tienda.nombre_tienda
@@ -14,12 +19,17 @@ def agregar_tienda(db: Session, tienda: schemas.Tienda):
     db.refresh(db_tienda)
     return db_tienda
 
-#Get al tienda
+#GET al TIENDA
 def obtener_valores_tienda(db: Session = Depends(SessionLocal)):
     tiendas = db.query(models.Tienda).all()
     return tiendas
 
-#POST valor bebida
+'''
+Bebida
+'''
+
+
+#POST valor BEBIDA
 def agregar_bebida(db: Session, bebida: schemas.Bebida):
     db_bebida = models.Bebida(
         codigo_bebida = bebida.codigo_bebida,
@@ -30,12 +40,16 @@ def agregar_bebida(db: Session, bebida: schemas.Bebida):
     db.refresh(db_bebida)
     return db_bebida
 
-#Get al tienda
+#GET al BEBIDA
 def obtener_valores_bebida(db: Session = Depends(SessionLocal)):
     bebidas = db.query(models.Bebida).all()
     return bebidas
 
-#POST valor bebedor
+'''
+Bebedor
+'''
+
+#POST valor BEBEDOR
 def agregar_bebedor(db: Session, bebedor: schemas.Bebedor):
     db_bebedor = models.Bebedor(
         cedula = bebedor.cedula,
@@ -46,17 +60,95 @@ def agregar_bebedor(db: Session, bebedor: schemas.Bebedor):
     db.refresh(db_bebedor)
     return db_bebedor
 
-#Get al tienda
+#GET al BEBEDOR
 def obtener_valores_bebedor(db: Session = Depends(SessionLocal)):
     bebedores = db.query(models.Bebedor).all()
     return bebedores
 
-#Get al frecuenta 
-def obtener_valores_frecuenta(db: Session = Depends(SessionLocal)):
-    bebedor = db.query(models.Bebedor).all()
-    bebedor = db.query(models.Tienda).all()
+'''
+Frecuenta
+'''
 
-    return bebedor
+#POST al FRECUENTA
+def agregar_frecuenta(db: Session, frecuenta: schemas.Frecuenta):
+    db_frecuenta = models.Frecuenta(
+        cedula = frecuenta.cedula,
+        codigo_tienda = frecuenta.codigo_tienda
+    )
+    db.add(db_frecuenta)
+    db.commit()
+    db.refresh(db_frecuenta)
+    return db_frecuenta
+
+
+#GET al FRECUENTA
+def obtener_valores_frecuenta(db: Session = Depends(SessionLocal)):
+    frecuenta = db.query(models.frecuenta).all()
+    return frecuenta
+
+
+'''
+Vende
+'''
+
+#POST al vende
+def agregar_vende(db: Session, vende: schemas.Vende):
+    db_vende = models.Vende(
+        codigo_tienda = vende.codigo_tienda,
+        codigo_bebida = vende.codigo_bebida,
+        precio = vende.precio
+    )
+    db.add(db_vende)
+    db.commit()
+    db.refresh(db_vende)
+    return db_vende
+
+
+#GET al vende
+def obtener_valores_vende(db: Session = Depends(SessionLocal)):
+    vende = db.query(models.Vende).all()
+    return vende
+
+'''
+Gusta
+'''
+
+#POST al GUSTA
+def agregar_gusta(db: Session, gusta: schemas.Gusta):
+    db_gusta = models.Gusta(
+        cedula = gusta.cedula,
+        codigo_bebida = gusta.codigo_bebida,
+    )
+    db.add(db_gusta)
+    db.commit()
+    db.refresh(db_gusta)
+    return db_gusta
+
+
+#GET al GUSTA
+def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
+    gusta = db.query(models.Gusta).all()
+    return gusta
+
+
+'''
+-Los bebedores que no les gusta la colombiana.
+-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
+-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
+-Para cada bebedor, las bebidas que no le gustan.
+-Los bebedores que frecuentan solo las tiendas que frecuenta Luis Perez.
+-Los bebedores que unicamente frecuentan las tiendas que unicamente sirven alguna bebida que le gusta.
+'''
+
+#-Los bebedores que no les gusta la colombiana.
+def gusta_colombiana(db: Session):
+    query = db.query(models.Gusta, models.Bebedor).\
+        join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).all()
+    print(query.__dir__())
+    return query
+
+
+
 
 #GET valor bebedores que les gusta cierta bebida
 def bebedores_gusta_bebida(db: Session, nombre_bebida: str):
