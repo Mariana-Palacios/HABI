@@ -132,8 +132,6 @@ def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
 
 
 '''
--Los bebedores que no les gusta la colombiana.
--Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
 -Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
 -Para cada bebedor, las bebidas que no le gustan.
 -Los bebedores que frecuentan solo las tiendas que frecuenta Luis Perez.
@@ -144,7 +142,8 @@ def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
 def gusta_colombiana(db: Session):
     query = db.query(models.Gusta, models.Bebedor, models.Bebida).\
             join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).\
-            join(models.Bebida, models.Bebida.codigo_bebida == models.Gusta.codigo_bebida).all()
+            join(models.Bebida, models.Bebida.codigo_bebida == models.Gusta.codigo_bebida).\
+            filter(models.Bebida.nombre_bebida != "Colombiana").all()
     results = []
     for gusto, bebedor, bebida in query:
         result = {
@@ -155,6 +154,37 @@ def gusta_colombiana(db: Session):
 
     return results
 
+#-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
+
+def frecuenta_Andres(db: Session):
+    query = db.query(models.Bebedor, models.Frecuenta, models.Tienda).\
+            join(models.Frecuenta, models.Frecuenta.cedula == models.Bebedor.cedula).\
+            join(models.Tienda, models.Tienda.codigo_tienda == models.Frecuenta.codigo_tienda).\
+            filter(models.Bebedor.nombre == "Andres Camilo Restrepo").all()
+    results = []
+    for bebedor, frecuenta, tienda in query:
+        result = {
+            "nombre": bebedor.nombre,
+            "nombre_bebida": tienda.nombre_tienda
+        }
+        results.append(result)
+
+    return results
+
+#-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
+
+def gusta_bebita_tienda(db: Session):
+    queryBebedor = db.query(models.Bebedor, models.Frecuenta).\
+            join(models.Frecuenta, models.Frecuenta.cedula == models.Bebedor.cedula).all()
+    queryGusta = db.query(models.Bebedor, models.Gusta).\
+            join(models.Gusta, models.Gusta.cedula == models.Bebedor.cedula).all()
+    results = []
+    for bebedor,frecuenta in queryBebedor:
+        results.append({"name":bebedor.nombre})
+    for bebedor,gusta in queryGusta:
+        results.append({"name":bebedor.nombre})
+
+    return results
 
 
 

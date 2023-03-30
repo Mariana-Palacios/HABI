@@ -101,6 +101,16 @@ def obtener_valores_vende_todo(db: Session = Depends(get_db)):
 def gusta_colombiana_data(db: Session = Depends(get_db)):
     return crud.gusta_colombiana(db=db)
 
-@app.get("/tienda/")
-def get_last_id_aquarium(db: Session = Depends(get_db)):
-    return crud.obtener_valores_tienda(db=db)
+#-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
+
+@app.get("/frecuentaAndres/")
+def frecuenta_Andres_data(db: Session = Depends(get_db)):
+    return crud.frecuenta_Andres(db=db)
+
+#-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
+
+@app.get("/gustaBebitaTienda/")
+def gusta_bebita_tienda_data(db: Session = Depends(get_db)):
+    return crud.gusta_bebita_tienda(db=db)
+
+
