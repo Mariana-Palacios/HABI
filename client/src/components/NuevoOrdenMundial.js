@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 const NuevoOrdenMundial = () => {
   const [texto, setTexto] = useState("");
   const [textoOuput, setTextoOuput] = useState('');
+  const [pruebaTecnica, setPruebaTecnica] = useState(1)
 
   //limitar input para que solo se puedan introducir 100 caracteres
   const handleInputChange=(e)=> {
