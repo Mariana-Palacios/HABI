@@ -62,7 +62,7 @@ class Bebedor(BebedorBase):
 # Definir modelo base para la Gusta
 class GustaBase(BaseModel):
     cedula: int
-    codigo_bebida:Union[str, Bebida]
+    codigo_bebida:Union[int, Bebida]
 
 # Definir modelo para crear nuevas Gustas
 class GustaCreate(GustaBase):
@@ -80,7 +80,7 @@ class Gusta(GustaBase):
 # Definir modelo base para la Frecuenta
 class FrecuentaBase(BaseModel):
     cedula: int
-    codigo_tienda:Union[str, Tienda]
+    codigo_tienda:Union[int, Tienda]
 
 # Definir modelo para crear nuevas Frecuentas
 class FrecuentaCreate(FrecuentaBase):
@@ -97,8 +97,8 @@ class Frecuenta(FrecuentaBase):
 
 # Definir modelo base para la Vende
 class VendeBase(BaseModel):
-    codigo_tienda:Union[str, Tienda]
-    codigo_bebida:Union[str, Bebida]
+    codigo_tienda:Union[int, Tienda]
+    codigo_bebida:Union[int, Bebida]
     precio: float
 
 # Definir modelo para crear nuevas Vendes
@@ -109,3 +109,12 @@ class VendeCreate(VendeBase):
 class Vende(VendeBase):
     class Config:
         orm_mode = True
+
+
+############
+#NoColombiana
+############
+
+# Definir modelo base para la Vende
+class NoColombiana(BaseModel):
+    nombre: str

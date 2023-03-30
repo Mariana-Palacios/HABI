@@ -98,8 +98,8 @@ def obtener_valores_vende_todo(db: Session = Depends(get_db)):
 #-Los bebedores que no les gusta la colombiana.
 
 @app.get("/bebedorGustaColombiana/")
-def obtener_valores_vende_todo(db: Session = Depends(get_db)):
-    return crud.obtener_valores_vende(db=db)
+def gusta_colombiana_data(db: Session = Depends(get_db)):
+    return crud.gusta_colombiana(db=db)
 
 @app.get("/tienda/")
 def get_last_id_aquarium(db: Session = Depends(get_db)):

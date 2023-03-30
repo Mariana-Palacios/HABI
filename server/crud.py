@@ -142,10 +142,18 @@ def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
 
 #-Los bebedores que no les gusta la colombiana.
 def gusta_colombiana(db: Session):
-    query = db.query(models.Gusta, models.Bebedor).\
-        join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).all()
-    print(query.__dir__())
-    return query
+    query = db.query(models.Gusta, models.Bebedor, models.Bebida).\
+            join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).\
+            join(models.Bebida, models.Bebida.codigo_bebida == models.Gusta.codigo_bebida).all()
+    results = []
+    for gusto, bebedor, bebida in query:
+        result = {
+            "nombre": bebedor.nombre,
+            "nombre_bebida": bebida.codigo_bebida
+        }
+        results.append(result)
+
+    return results
 
 
 
