@@ -28,3 +28,25 @@
         flex-wrap: wrap;
     }
 }
+
+//input text style
+
+.inputStyle{
+    border: 0;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+ 
+.inputStyle:focus, .inputStyle:focus, .inputStyle[type]:focus, .inputStyle:hover{
+    outline: 0 none;
+    border-bottom: 2px solid $blue;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}

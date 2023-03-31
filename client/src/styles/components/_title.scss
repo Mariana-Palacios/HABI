@@ -1,0 +1,36 @@
+@import '../animacion.scss';
+
+.Title{
+    position: absolute;;
+    height: 100vh;
+    width: 100vw;
+    right: 0;
+    &__img{
+        width: 10%;
+        height: auto;
+    }
+    &__title{
+        font-size: 24px;
+    }
+    &__name{
+        font-size: 20px;
+    }
+    .aboutMe{
+        position: absolute;
+        left: 0;
+    }
+    .wave{
+        position: absolute;
+        right: 0;
+        height: auto;
+        &-1{
+            @include Wave(wave1, 50vw, 45vw, 14s)
+        }
+        &-2{
+            @include Wave(wave2, 40vw, 42vw, 12s)
+        }
+        &-3{
+            @include Wave(wave3, 30vw, 25vw, 17s)
+        }
+    }
+}

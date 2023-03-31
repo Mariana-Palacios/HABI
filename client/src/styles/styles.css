@@ -1,13 +1,4 @@
-.NuevoOrdenMundial {
-  height: 100vh;
-  width: 100vw;
-}
-
-.PreguntaExtra {
-  height: 100vh;
-  width: 100vw;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -37,4 +28,188 @@
 }
 .flex-f-w {
   flex-wrap: wrap;
+}
+
+.inputStyle {
+  border: 0;
+  border-bottom: 2px solid black;
+  text-align: center;
+}
+
+.inputStyle:focus, .inputStyle:focus, .inputStyle[type]:focus, .inputStyle:hover {
+  outline: 0 none;
+  border-bottom: 2px solid #02023e;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.NuevoOrdenMundial {
+  height: 100vh;
+  width: 100vw;
+}
+.NuevoOrdenMundial__title {
+  color: #02023e;
+}
+
+.PreguntaExtra {
+  height: 100vh;
+  width: 100vw;
+}
+.PreguntaExtra__title {
+  color: #02023e;
+}
+
+.Title {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  right: 0;
+}
+.Title__img {
+  width: 10%;
+  height: auto;
+}
+.Title__title {
+  font-size: 24px;
+}
+.Title__name {
+  font-size: 20px;
+}
+.Title .aboutMe {
+  position: absolute;
+  left: 0;
+}
+.Title .wave {
+  position: absolute;
+  right: 0;
+  height: auto;
+}
+.Title .wave-1 {
+  -webkit-animation: wave1 14s ease-in-out infinite;
+          animation: wave1 14s ease-in-out infinite;
+}
+@-webkit-keyframes wave1 {
+  0% {
+    width: 50vw;
+  }
+  50% {
+    width: 45vw;
+  }
+  100% {
+    width: 50vw;
+  }
+}
+@keyframes wave1 {
+  0% {
+    width: 50vw;
+  }
+  50% {
+    width: 45vw;
+  }
+  100% {
+    width: 50vw;
+  }
+}
+.Title .wave-2 {
+  -webkit-animation: wave2 12s ease-in-out infinite;
+          animation: wave2 12s ease-in-out infinite;
+}
+@-webkit-keyframes wave2 {
+  0% {
+    width: 40vw;
+  }
+  50% {
+    width: 42vw;
+  }
+  100% {
+    width: 40vw;
+  }
+}
+@keyframes wave2 {
+  0% {
+    width: 40vw;
+  }
+  50% {
+    width: 42vw;
+  }
+  100% {
+    width: 40vw;
+  }
+}
+.Title .wave-3 {
+  -webkit-animation: wave3 17s ease-in-out infinite;
+          animation: wave3 17s ease-in-out infinite;
+}
+@-webkit-keyframes wave3 {
+  0% {
+    width: 30vw;
+  }
+  50% {
+    width: 25vw;
+  }
+  100% {
+    width: 30vw;
+  }
+}
+@keyframes wave3 {
+  0% {
+    width: 30vw;
+  }
+  50% {
+    width: 25vw;
+  }
+  100% {
+    width: 30vw;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-animation: MainPage 0.5s ease-in-out forwards;
+          animation: MainPage 0.5s ease-in-out forwards;
+  font-size: 16px;
+  font-family: "Chakra Petch", sans-serif;
+}
+@-webkit-keyframes MainPage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes MainPage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.PreguntaExtra .btn, .NuevoOrdenMundial .btn {
+  background: red;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 40px;
+  font-size: 18px;
+  border-color: transparent;
+  font-weight: bolder;
+  margin: 20px;
+}
+.PreguntaExtra .btn:hover, .NuevoOrdenMundial .btn:hover {
+  background-color: blue;
+  color: white;
+  cursor: -webkit-grab;
+  cursor: grab;
 }/*# sourceMappingURL=styles.css.map */

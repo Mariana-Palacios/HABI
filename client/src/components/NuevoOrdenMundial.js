@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { GiWorld } from 'react-icons/gi';
 
 const NuevoOrdenMundial = () => {
   const [texto, setTexto] = useState("");
@@ -29,15 +30,15 @@ const NuevoOrdenMundial = () => {
 
   return (
     <div onSubmit={(e)=>handleSubmit(e)} className="NuevoOrdenMundial flex flex-j-c flex-a-i flex-f-d-c">
-      <h1>Nuevo Orden Mundial</h1>
+      <h1 className='NuevoOrdenMundial__title'>Nuevo Orden Mundial <GiWorld/></h1>
       <form className='flex flex-j-c flex-a-i flex-f-d-c'>
         <ul>
-          <li className='flex'>
+          <li className='flex flex-f-d-c'>
             <label for="name">S:</label>
-            <input onChange={handleInputChange} type="text" maxLength="100" />
+            <input onChange={handleInputChange} type="text" maxLength="100" className='inputStyle' />
           </li>
         </ul>
-        <button>Ordenar</button>
+        <button className='btn'>Ordenar</button>
       </form>
       <h2>Salida de la cadena ordenada S</h2>
       <p>{textoOuput}</p>

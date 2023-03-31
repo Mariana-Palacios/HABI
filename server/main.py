@@ -95,26 +95,36 @@ def agregar_vende_data(vende: schemas.Vende, db: Session = Depends(get_db)):
 def obtener_valores_vende_todo(db: Session = Depends(get_db)):
     return crud.obtener_valores_vende(db=db)
 
-#-Los bebedores que no les gusta la colombiana.
+#1-Los bebedores que no les gusta la colombiana.
 
 @app.get("/bebedorGustaColombiana/")
 def gusta_colombiana_data(db: Session = Depends(get_db)):
     return crud.gusta_colombiana(db=db)
 
-#-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
+#2-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
 
 @app.get("/frecuentaAndres/")
 def frecuenta_Andres_data(db: Session = Depends(get_db)):
     return crud.frecuenta_Andres(db=db)
 
-#-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
+#3-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
 
 @app.get("/gustaBebitaTienda/")
 def gusta_bebita_tienda_data(db: Session = Depends(get_db)):
     return crud.gusta_bebita_tienda(db=db)
 
-#-Para cada bebedor, las bebidas que no le gustan.
+#4-Para cada bebedor, las bebidas que no le gustan.
 
 @app.get("/bebidaNoGusta/")
 def bebida_no_gusta_data(db: Session = Depends(get_db)):
     return crud.bebida_no_gusta(db=db)
+
+#5-
+
+
+#6-Los bebedores que unicamente frecuentan las tiendas que unicamente sirven alguna bebida que le gusta.
+@app.get("/frecuentaTiendaBebidaGustaData/")
+def frecuenta_tienda_bebida_gusta_data(db: Session = Depends(get_db)):
+    return crud.frecuenta_tienda_bebida_gusta(db=db)
+
+

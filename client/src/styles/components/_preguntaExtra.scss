@@ -1,4 +1,7 @@
 .PreguntaExtra{
     height: 100vh;
     width: 100vw;
+    &__title{
+        color: $blue;
+    }
 }

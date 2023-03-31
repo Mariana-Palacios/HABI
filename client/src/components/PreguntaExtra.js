@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
+import { BsQuestionSquare } from 'react-icons/bs';
+
 const PreguntaExtra = () => {
   const [texto, setTexto] = useState("");
   const [textoOuput, setTextoOuput] = useState('');
@@ -20,15 +22,15 @@ const PreguntaExtra = () => {
   
   return (
     <div onSubmit={(e)=>handleSubmit(e)}className="PreguntaExtra flex flex-j-c flex-a-i flex-f-d-c">
-      <h1>Pregunta Extra</h1>
+      <h1 className='PreguntaExtra__title'>Pregunta Extra<BsQuestionSquare/></h1>
       <form  className='flex flex-j-c flex-a-i flex-f-d-c'>
         <ul>
-          <li className='flex'>
+          <li className='flex flex-f-d-c'>
             <label for="name">fragmento de marcado HTML:</label>
-            <input onChange={handleInputChange} type="text" />
+            <input onChange={handleInputChange} type="text" className='inputStyle' />
           </li>
         </ul>
-        <button>Obtener Dominio</button>
+        <button className='btn'>Obtener Dominio</button>
       </form>
       <h2>Dominio</h2>
       <p>{textoOuput==null?'soy null':textoOuput }</p>

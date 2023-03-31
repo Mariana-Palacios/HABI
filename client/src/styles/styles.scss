@@ -1,8 +1,33 @@
-//components 
-@import './components/nuevoOrdenMundial.scss';
-@import './components/preguntaExtra.scss';
 
 //base
-@import './base.scss'
+@import './variables.scss';
+@import './base.scss';
+@import './animacion.scss';
+
+//components 
+
+@import './components/nuevoOrdenMundial.scss';
+@import './components/preguntaExtra.scss';
+@import './components/title.scss';
 
 //variables
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    @include Appear(MainPage, 0.5s);
+    font-size: 16px;
+    font-family: $bebas;
+}
+
+.PreguntaExtra,.NuevoOrdenMundial{
+    .btn{
+        @include button(red, white, 18px, 5px, 15px, 40px);
+        font-weight: bolder;
+        margin:20px;
+    }
+    .btn:hover{
+        @include buttonHover(blue,white, black)
+    }
+} 

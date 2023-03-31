@@ -3,6 +3,7 @@ from fastapi import Depends
 from database import SessionLocal
 import models, schemas
 from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import aliased
 
 '''
 Tienda
@@ -133,10 +134,10 @@ def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
 
 '''
 -Los bebedores que frecuentan solo las tiendas que frecuenta Luis Perez.
--Los bebedores que unicamente frecuentan las tiendas que unicamente sirven alguna bebida que le gusta.
+
 '''
 
-#-Los bebedores que no les gusta la colombiana.
+#1-Los bebedores que no les gusta la colombiana.
 def gusta_colombiana(db: Session):
     query = db.query(models.Gusta, models.Bebedor, models.Bebida).\
             join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).\
@@ -152,7 +153,7 @@ def gusta_colombiana(db: Session):
 
     return results
 
-#-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
+#2-Las fuentes de soda que no son frecuentadas por Andres Camilo Restrepo.
 
 def frecuenta_Andres(db: Session):
     query = db.query(models.Bebedor, models.Frecuenta, models.Tienda).\
@@ -169,7 +170,7 @@ def frecuenta_Andres(db: Session):
 
     return results
 
-#-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
+#3-Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
 
 def gusta_bebita_tienda(db: Session):
     queryBebedor = db.query(models.Bebedor, models.Frecuenta).\
@@ -184,7 +185,8 @@ def gusta_bebita_tienda(db: Session):
 
     return results
 
-#-Para cada bebedor, las bebidas que no le gustan.
+
+#4-Para cada bebedor, las bebidas que no le gustan.
 
 def bebida_no_gusta(db: Session):
     query = db.query(models.Bebedor, models.Gusta, models.Bebida).\
@@ -206,12 +208,25 @@ def bebida_no_gusta(db: Session):
 
     return results
 
+#5-Los bebedores que frecuentan solo las tiendas que frecuenta Luis Perez.
 
-#GET valor bebedores que les gusta cierta bebida
-def bebedores_gusta_bebida(db: Session, nombre_bebida: str):
-    bebida = db.query(models.Bebida).filter(models.Bebida.nombre_bebida == nombre_bebida).first()
-    codigo_bebida = bebida.codigo_bebida
-    gusta = db.query(models.Gusta).filter(models.Gusta.codigo_bebida == codigo_bebida).all()
-    cedulas = [g.cedula for g in gusta]
-    frecuenta = db.query(models.Frecuenta).filter(models.Frecuenta.cedula.in_(cedulas)).all()
-    return [f.cedula for f in frecuenta]
+
+
+#6-Los bebedores que unicamente frecuentan las tiendas que unicamente sirven alguna bebida que le gusta.
+
+def frecuenta_tienda_bebida_gusta(db: Session):
+    frec_gusta = aliased(models.Frecuenta)
+    bebedor = aliased(models.Bebedor)
+    query = db.query(models.Bebedor, models.Frecuenta, models.Tienda, models.Bebida, models.Gusta).\
+        join(models.Bebedor, models.Bebedor.cedula == models.Frecuenta.cedula).\
+        join(models.Frecuenta, models.Frecuenta.codigo_tienda == models.Tienda.codigo_tienda).\
+        join(models.Bebedor, models.Bebedor.cedula == models.Gusta.cedula).\
+        join(models.Gusta, models.Gusta.codigo_bebida == models.Bebida.codigo_bebida).\
+        join(frec_gusta, frec_gusta.cedula == models.Gusta.cedula).all()
+    results = []
+    for bebedor, frecuenta, tienda, bebida, gusta in query :
+        result = {
+            "nombre": bebedor.nombre
+        }
+        results.append(result)
+    return results

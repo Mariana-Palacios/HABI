@@ -1,0 +1,41 @@
+@mixin Appear($animationName, $time){
+    @keyframes #{$animationName}{
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+    animation: #{$animationName} $time ease-in-out forwards;
+}
+@mixin Wave($animationName, $width-start, $width-end, $time){
+    @keyframes #{$animationName}{
+        0%{
+            width: $width-start;
+        }
+        50%{
+            width: $width-end;
+        }
+        100%{
+            width: $width-start;
+        }
+    }
+    animation: #{$animationName} $time ease-in-out infinite;  
+}
+
+@mixin button($backgroundColor, $fontColor, $fontSize, $padding-top, $padding-rigth, $border-radius) {
+    background: $backgroundColor;
+    color: $fontColor; 
+    padding: $padding-top $padding-rigth;
+    border-radius: $border-radius;
+    font-size: $fontSize;
+    border-color: transparent;
+}
+
+@mixin buttonHover($backgroundColor,$fontColor, $borderColor) {
+    background-color: $backgroundColor;
+    color: $fontColor;
+    cursor: grab;
+}
+  
