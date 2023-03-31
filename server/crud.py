@@ -132,8 +132,6 @@ def obtener_valores_gusta(db: Session = Depends(SessionLocal)):
 
 
 '''
--Los bebedores que les gusta al menos una bebida y que frecuentan al menos una tienda.
--Para cada bebedor, las bebidas que no le gustan.
 -Los bebedores que frecuentan solo las tiendas que frecuenta Luis Perez.
 -Los bebedores que unicamente frecuentan las tiendas que unicamente sirven alguna bebida que le gusta.
 '''
@@ -186,6 +184,27 @@ def gusta_bebita_tienda(db: Session):
 
     return results
 
+#-Para cada bebedor, las bebidas que no le gustan.
+
+def bebida_no_gusta(db: Session):
+    query = db.query(models.Bebedor, models.Gusta, models.Bebida).\
+            join(models.Gusta, models.Gusta.cedula == models.Bebedor.cedula).\
+            join(models.Bebida, models.Bebida.codigo_bebida == models.Gusta.codigo_bebida).all()
+    results = []
+    bebidas_todas = db.query(models.Bebida).all()
+    bebidas = []
+    for bebida in bebidas_todas:
+        bebidas.append(bebida.nombre_bebida)
+    
+    print(bebidas)
+    for bebedor, gusta, bebida in query:
+        result = {
+            "nombre": bebedor.nombre,
+            "nombre_bebidas": [elemento for elemento in bebidas if elemento != bebida.nombre_bebida]
+        }
+        results.append(result)
+
+    return results
 
 
 #GET valor bebedores que les gusta cierta bebida

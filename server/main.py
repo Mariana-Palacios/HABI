@@ -113,4 +113,8 @@ def frecuenta_Andres_data(db: Session = Depends(get_db)):
 def gusta_bebita_tienda_data(db: Session = Depends(get_db)):
     return crud.gusta_bebita_tienda(db=db)
 
+#-Para cada bebedor, las bebidas que no le gustan.
 
+@app.get("/bebidaNoGusta/")
+def bebida_no_gusta_data(db: Session = Depends(get_db)):
+    return crud.bebida_no_gusta(db=db)
